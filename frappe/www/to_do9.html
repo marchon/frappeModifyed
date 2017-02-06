@@ -1,0 +1,36 @@
+{% extends "templates/web.html" %}
+
+{% block style %}
+<style>
+{% include "templates/includes/login/login.css" %}
+</style>
+{% endblock %}
+
+{% block page_content %}
+	<form id="myForm" method="POST">
+		New task:<br>
+		<input id="desc" type="text" name="description">
+		<br><br>
+		Crew member:<br>
+		<input id="person" type="text" name="person">
+		<br><br>
+		<input type="button" value="Add" onclick="send()">
+	</form>
+
+{% endblock %}
+{% block script %}
+	<script>
+		function send(){
+			var d = document.getElementById("desc");
+			var p = document.getElementById("person");
+			frappe.call({
+				method: "frappe.www.to_do9.toDo",
+				args: {"desc":d.value, "person":p.value},
+				callback: function(r){
+					alert(r.message);
+				}
+			});
+			
+		}
+	</script>
+{% endblock %}

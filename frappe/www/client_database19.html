@@ -1,0 +1,95 @@
+{% extends "templates/web.html" %}
+{% block style %}
+<style>
+	{% include "templates/includes/login/login.css" %}
+	/* prosadata code generation begin */
+	/* prosadata.com code generation end */
+	#imgtop{
+		display: block;
+    	margin: auto;
+		width: 200px;
+	}
+	
+	.profileImage{
+		position: absolute;
+  		left: 0px;
+  		width: 200px;
+	}
+	.infoDiv{
+		margin-left: 200px;
+	}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<!-- prosadata code generation begin -->
+<div class="container-fluid" id="everything">
+	<div class="row">
+		<img src="{{"/assets/frappe/images/client_database.jpg" }}" id="imgtop">
+		<p style="font-family: DosisBold; font-size: 18px; text-align: center; font-weight: bold;"> Client Database </p>	
+	</div>	
+	<div class="row">
+		<label for="client">Client</label>
+		<select name="client" id="client">
+			{% for cont in SClient: %}
+				<option value="{{cont['name']}}">{{cont['customer_name']}}</option>
+			{% endfor %}
+		</select>	
+		<button onclick="findClient()">Find</button>
+		 <tbody id="body1">
+		</tbody>		 
+	</div>	
+</div>
+<!-- prosadata.com code generation end -->
+{% endblock %}
+{% block script %}
+<script>
+<!-- prosadata code generation begin -->
+	
+	function findClient(){
+		var new_tbody = document.createElement('tbody');
+		var client = document.getElementById("client").value;
+		{% for cont in SClient: %}
+				if ("{{cont['name']}}" === client){
+					createDivImage("{{cont['image']}}", new_tbody)
+					createDiv("Full Name", "{{cont['customer_name']}}", new_tbody);	
+					createDiv("Type", "{{cont['customer_type']}}", new_tbody);	
+					createDiv("Status", "{{cont['status']}}", new_tbody);	
+					createDiv("Tax ID", "{{cont['tax_id']}}", new_tbody);	
+					createDiv("Address HTML", "{{cont['address_html']}}",new_tbody);	
+					createDiv("Website", "{{cont['website']}}",new_tbody);
+					
+					createDiv("Credit Days", "{{cont['credit_days']}}",new_tbody)	
+					createDiv("Credit Limit", "{{cont['Credit Limit']}}",new_tbody);	
+					createDiv("Details", "{{cont['customer_details']}}",new_tbody);	
+					createDiv("Comission Rate", "{{cont['default_commission_rate']}}",new_tbody);	
+				}	
+		{% endfor %}
+		var everything = document.getElementById("everything");
+		everything.appendChild(new_tbody);
+	 	var old_tbody = document.getElementsByTagName("tbody").item(0);
+	 	old_tbody.parentNode.replaceChild(new_tbody, old_tbody); 
+	}	
+	
+	function createDivImage(data, new_tbody){
+		var newDiv = document.createElement("div"); 		
+		var elem = document.createElement("img");
+		elem.setAttribute("src", data);
+		//var newContent = document.createTextNode(type + ": " + data);
+		newDiv.className = "profileImage";
+		newDiv..appendChild("elem");
+		newDiv.appendChild(newContent); 
+		new_tbody.appendChild(newDiv);
+	}	 
+		 
+	function createDiv(type, data, new_tbody){
+		var newDiv = document.createElement("div"); 
+		var newContent = document.createTextNode(type + ": " + data); 
+		newDiv.className = "infoDiv";
+		newDiv.appendChild(newContent); 
+		new_tbody.appendChild(newDiv);
+	}
+		 
+<!-- prosadata.com code generation end -->
+</script>
+{% endblock %}

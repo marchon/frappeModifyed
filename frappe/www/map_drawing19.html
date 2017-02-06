@@ -1,0 +1,128 @@
+{% extends "templates/web.html" %}
+
+{% block style %}
+<style>
+{% include "templates/includes/login/login.css" %}
+</style>
+{% endblock %}
+
+{% block page_content %}
+	<h1>Enables drawing on pas</h1>
+
+	<label for="person">Client:</label>
+		<select id="person">
+			{% for cont in rowContent: %}
+				<option value={{cont['name']}}>{{cont['customer_name']}}</option>
+			{% endfor %} 
+		</select>
+
+	<button id="capture" onclick="captureImg()">Take screenshot</button>
+
+	<div id="map" style="width:1000px;height:500px;background:yellow">
+	</div>
+
+	<img id="screenshot" src="//maps.googleapis.com/maps/api/staticmap?center=34.05,-118.24&zoom=10&size=1000x500&key=AIzaSyCrstMxtS9ddgvbfY5oiDB8seRKDskMbA8"></img>
+
+
+
+{% endblock %}
+{% block script %}
+	<script>
+		var map;
+		var markers = [];
+		var finalImageSrc;
+
+		function captureImg(){
+			var center = map.getCenter();
+			center = center.toString();
+			var no_brackets = center.substring(1,center.length-1);
+			var coord = no_brackets.split(", ");
+			var zoom = map.getZoom();
+			zoom = zoom.toString();
+			var p = document.getElementById("person");
+			var date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+			var src = "//maps.googleapis.com/maps/api/staticmap?center=" + coord[0].substring(0,6) + "," + coord[1].substring(0,6) + "&zoom="+ zoom +"&size=1000x500";
+			if (markers.length > 0){
+				src = src + "&markers=color:red";
+			}
+			for (var i=0; i<markers.length; i++){
+				if (markers[i]!==null){
+					var lat = markers[i].getPosition().lat();
+					var lon = markers[i].getPosition().lng();
+					var coord = lat.toString().substring(0,6) + "," + lon.toString().substring(0,6);
+					src = src + "%7C" + coord;
+				}
+
+			}
+			var key = "&key=AIzaSyCrstMxtS9ddgvbfY5oiDB8seRKDskMbA8";
+			src = src + key;
+			var show = document.getElementById("screenshot");
+			screenshot.src = src; 
+			frappe.call({
+					method: "frappe.www.map_drawing19.send",
+					args: {"client":p.options[p.selectedIndex].text, "img": src, "date": date},
+					callback: function(r){
+				}
+
+			
+
+		}
+
+		function convertasbinaryimage(p,date)
+		{ 
+			html2canvas(document.getElementById("screenshot"), {
+
+			useCORS: true,
+
+			onrendered: function(canvas) {
+			     
+				 var img = canvas.toDataURL("image/png"); 
+				   
+				 img = img.replace('data:image/png;base64,', '');
+				 finalImageSrc = 'data:image/png;base64,' + img;
+				 
+			});
+                    
+				}
+			});
+		}
+
+
+		function myMap() {
+		var mapOptions = {
+		    center: new google.maps.LatLng(34.05, -118.24),
+		    zoom: 10,
+		    mapTypeId: google.maps.MapTypeId.HYBRID
+		}
+		var myCenter = new google.maps.LatLng(34.05, -118.24);
+		map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+  		var marker = new google.maps.Marker({position:myCenter});
+  		markers.push(marker);
+  		google.maps.event.addListener(marker, 'click', function(event){
+				marker.setMap(null);
+			});
+  		marker.setMap(map);
+  		google.maps.event.addListener(map, 'click', function(event){
+  			placeMarker(event.latLng);
+  		});
+		}
+
+		function placeMarker(location) {
+			var marker = new google.maps.Marker({
+				position : location,
+				map : map
+			});
+			markers.push(marker);
+			google.maps.event.addListener(marker, 'click', function(event){
+				marker.setMap(null);
+			});
+
+		}
+
+	</script>
+
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrstMxtS9ddgvbfY5oiDB8seRKDskMbA8&callback=myMap"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+{% endblock %}

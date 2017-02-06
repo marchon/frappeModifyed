@@ -1,0 +1,49 @@
+{% extends "templates/web.html" %}
+
+{% block style %}
+<style>
+{% include "templates/includes/login/login.css" %}
+</style>
+{% endblock %}
+
+{% block page_content %}
+	<form id="myForm" method="POST">
+		<label for="operation">Operation:</label>
+		<select id="operation">
+			<option value="in">Check in</option>
+			<option value="out">Check out</option>
+		</select>
+		<br><br>
+		<label for="code">Item code:</label>
+		<input id="code" type="text" name="code">
+		<br><br>
+		<label for="person">Crew member:</label>
+		<input id="person" type="text" name="person">
+		<br><br>
+		<label for="date">Date:</label>
+		<input type="date" id="date" name="date">
+		<br><br>
+		<input type="button" value="Add" onclick="send()">
+
+	</form>
+
+{% endblock %}
+{% block script %}
+	<script>
+		function send(){
+			var d = document.getElementById("code");
+			var p = document.getElementById("person");
+			var e = document.getElementById("operation");
+			var date = document.getElementById("date");
+
+			frappe.call({
+				method: "frappe.www.check_tools6.enterOperation",
+				args: {"op": e.options[e.selectedIndex].text, "itemCode":d.value, "person":p.value, "date": date.value},
+				callback: function(r){
+					
+				}
+			});
+			
+		}
+	</script>
+{% endblock %}

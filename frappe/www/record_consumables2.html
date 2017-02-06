@@ -1,0 +1,43 @@
+{% extends "templates/web.html" %}
+
+{% block style %}
+<style>
+{% include "templates/includes/login/login.css" %}
+</style>
+{% endblock %}
+
+{% block page_content %}
+	<form id="myForm" method="POST">
+		
+		<label for="code">Consumable code:</label>
+		<input id="code" type="text" name="code">
+		<br><br>
+		<label for="date">Date:</label>
+		<input type="date" id="date" name="date">
+		<br><br>
+		<label for="amount">Amount:</label>
+		<input id="amount" type="numer" min="0" step="0.0001" name="amount">
+		<br><br>
+		<input type="button" value="Add" onclick="send()">
+
+	</form>
+
+{% endblock %}
+{% block script %}
+	<script>
+		function send(){
+			var d = document.getElementById("code");
+			var p = document.getElementById("amount");
+			var date = document.getElementById("date");
+
+			frappe.call({
+				method: "frappe.www.record_consumables2.enterOperation",
+				args: {"code": d.value,"amount":p.value, "date": date.value},
+				callback: function(r){
+					
+				}
+			});
+			
+		}
+	</script>
+{% endblock %}

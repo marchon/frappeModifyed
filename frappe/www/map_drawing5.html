@@ -1,0 +1,94 @@
+{% extends "templates/web.html" %}
+
+{% block style %}
+<style>
+{% include "templates/includes/login/login.css" %}
+</style>
+{% endblock %}
+
+{% block page_content %}
+	<h1>Enables drawing on pas</h1>
+
+	<label for="person">Client:</label>
+		<select id="person">
+			{% for cont in rowContent: %}
+				<option value={{cont['name']}}>{{cont['full_name']}}</option>
+			{% endfor %} 
+		</select>
+
+	<button id="capture" onclick="captureImg()">Take screenshot</button>
+
+	<div id="map" style="width:100%;height:500px;background:yellow">
+	</div>
+
+	<img id="screenshot" src="//maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=AIzaSyCrstMxtS9ddgvbfY5oiDB8seRKDskMbA8"></img>
+
+
+
+{% endblock %}
+{% block script %}
+	<script>
+		var map;
+
+		function captureImg(){
+			var center = map.getCenter();
+			center = center.toString();
+			var no_brackets = center.substring(1,center.length-1);
+			var coord = no_brackets.split(", ");
+			alert(coord[0]);
+			alert(coord[1]);
+			var p = document.getElementById("person");
+			var date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+			var src = "//maps.googleapis.com/maps/api/staticmap?center=" + coord[0] + "," + coord[1] + ",CA&zoom=14&size=400x400&key=AIzaSyCrstMxtS9ddgvbfY5oiDB8seRKDskMbA8";
+
+			var img = document.getElementById("screenshot");
+			img.src = src;
+		}
+
+		function send(){
+
+			frappe.call({
+				method: "frappe.www.to_do26.toDo",
+				args: {"desc":d.value, "person":p.options[p.selectedIndex].value, "prio": e.options[e.selectedIndex].text, "date": date.value},
+				callback: function(r){
+				}
+			});
+			
+		}
+
+		function myMap() {
+		var mapOptions = {
+		    center: new google.maps.LatLng(34.05, -118.24),
+		    zoom: 10,
+		    mapTypeId: google.maps.MapTypeId.HYBRID
+		}
+		var myCenter = new google.maps.LatLng(34.05, -118.24);
+		map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+  		var marker = new google.maps.Marker({position:myCenter});
+  		google.maps.event.addListener(marker, 'click', function(event){
+				marker.setMap(null);
+			});
+  		marker.setMap(map);
+  		google.maps.event.addListener(map, 'click', function(event){
+  			placeMarker(event.latLng);
+  		});
+		}
+
+		function placeMarker(location) {
+			var marker = new google.maps.Marker({
+				position : location,
+				map : map
+			});
+			google.maps.event.addListener(marker, 'click', function(event){
+				marker.setMap(null);
+			});
+
+		}
+
+	</script>
+
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrstMxtS9ddgvbfY5oiDB8seRKDskMbA8&callback=myMap"></script>
+
+{% endblock %}

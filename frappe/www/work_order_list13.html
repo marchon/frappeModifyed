@@ -1,0 +1,255 @@
+{% extends "templates/web.html" %}
+{% block style %}
+<style>
+	{% include "templates/includes/login/login.css" %}
+	  
+	{% include "www/css/bootstrap.css" %}
+  .img-tamano{
+
+      width:150px;
+      padding:10px;
+
+    }
+
+    .altura {
+
+    	top:150px;
+
+
+    }
+.tamano {
+
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clockon {
+
+background-color: #229a2a;
+color: #fff;
+
+}
+.clockout {
+
+background-color: #ad2525;
+color: #fff;
+}
+.break {
+
+background-color: #bfbf14;
+color: #fff;
+}
+.jobcode {
+
+background-color: #17468a;
+color: #fff;
+}
+.view {
+
+background-color: #583086;
+color: #fff;
+}
+
+
+	@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .altura { 
+
+      top:20px;
+      padding-bottom:20px;
+
+    }
+
+    .tamano {
+}
+display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+  }
+  
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+{% endblock %}
+
+	
+
+{% block page_content %}
+  <br><br>
+  <input type="text" id="find">
+  <button onclick="find()">Find</button>
+  <br><br>
+  <table id="table1">
+    <thead>
+    <tr>
+      <th>Work order</th>
+      <th>Subject</th>
+      <th>Project</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Expected start date</th>
+      <th>Expected time</th>
+      <th>Weight</th>
+      <th>Expected end date</th>
+      <th>Progress</th>
+      <th>Description</th>
+      <th>Depends on tasks</th>
+      <th>Actual start date</th>
+      <th>Actual time</th>
+      <th>Actual end date</th>
+      <th>Total costing amount</th>
+      <th>Total expense claim</th>
+      <th>Total billing amount</th>
+      <th>Review date</th>
+      <th>Closing date</th>
+      <th>Company</th>
+    </tr>
+    </thead>
+    <tbody id="body1">
+      {% for cont in rowContent: %}
+        
+        <tr>
+          <td>{{cont['name']}}</td>
+          <td>{{cont['subject']}}</td>
+          <td>{{cont['project']}}</td>
+          <td>{{cont['status']}}</td>
+          <td>{{cont['priority']}}</td>
+          <td>{{cont['exp_start_date']}}</td>
+          <td>{{cont['expected_time']}}</td>
+          <td>{{cont['task_weight']}}</td>
+          <td>{{cont['exp_end_date']}}</td>
+          <td>{{cont['progress']}}</td>
+          <td>{{cont['description']}}</td>
+          <td>{{cont['depends_on_tasks']}}</td>
+          <td>{{cont['act_start_date']}}</td>
+          <td>{{cont['actual_time']}}</td>
+          <td>{{cont['act_end_date']}}</td>
+          <td>{{cont['total_costing_amount']}}</td>
+          <td>{{cont['total_expense_claim']}}</td>
+          <td>{{cont['total_billing_amount']}}</td>
+          <td>{{cont['review_date']}}</td>
+          <td>{{cont['closing_date']}}</td>
+          <td>{{cont['company']}}</td>
+        </tr>
+         
+      {% endfor %}  
+     </tbody>
+  </table>
+	
+{% endblock %}
+{% block script %}
+<script>
+  function find(){
+      var new_tbody = document.createElement('tbody');
+
+      var filter = document.getElementById("find").value;
+      {% for cont in rowContent:%}
+        var all = [];
+        all.append("{{cont['name']}}");
+        all.append("{{cont['subject']}}");
+        all.append("{{cont['project']}}");
+        all.append("{{cont['status']}}");
+        all.append("{{cont['priority']}}");
+        all.append("{{cont['exp_start_date']}})";
+        all.append("{{cont['expected_time']}}");
+        all.append("{{cont['task_weight']}}");
+        all.append("{{cont['exp_end_date']}}");
+        all.append("{{cont['progress']}}");
+        all.append("{{cont['description']}}");
+        all.append("{{cont['depends_on_tasks']}}");
+        all.append("{{cont['act_start_date']}}");
+        all.append("{{cont['actual_time']}}");
+        all.append("{{cont['act_end_date']}}");
+        all.append("{{cont['total_costing_amount']}}");
+        all.append("{{cont['total_expense_claim']}}");
+        all.append("{{cont['total_billing_amount']}}");
+        all.append("{{cont['review_date']}}");
+        all.append("{{cont['closing_date']}}");
+        all.append("{{cont['company']}}");
+
+        var found = false;
+        for (var i=0; i<all.length(); i++){
+          found = found || (all[i].indexOf(filter) !== -1);
+        }
+
+        if (found){
+          row = document.createElement("tr");
+          cell1 = createNewCell("{{cont['name']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['subject']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['project']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['status']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['priority']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['exp_start_date']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['expected_time']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['task_weight']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['exp_end_date']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['progress']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['description']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['depends_on_tasks']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['act_start_date']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['actual_time']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['act_end_date']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['total_costing_amount']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['total_expense_claim']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['total_billing_amount']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['review_date']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['closing_date']}}");
+          row.appendChild(cell1);
+          cell1 = createNewCell("{{cont['company']}}");
+          row.appendChild(cell1);
+          
+          new_tbody.appendChild(row);
+        }
+         
+      {% endfor %}
+
+      var old_tbody = document.getElementById("body1");
+      old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
+  }
+
+  function createNewCell(content_cell){
+    cell1= document.createElement("td");
+    textNode1 = document.createTextNode(content_cell);
+    cell1.appendChild(textNode1);
+    return cell1;
+  }
+
+</script>
+{% endblock %}

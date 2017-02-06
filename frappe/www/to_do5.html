@@ -1,0 +1,49 @@
+{% extends "templates/web.html" %}
+
+{% block style %}
+<style>
+{% include "templates/includes/login/login.css" %}
+</style>
+{% endblock %}
+
+{% block page_content %}
+	<form id="myForm" method="POST">
+		New task:<br>
+		<input id="desc" type="text" name="description">
+		<br><br>
+		Crew member:<br>
+		<input id="person" type="text" name="person">
+		<br><br>
+		<input type="button" value="Add" onclick="send()">
+	</form>
+
+{% endblock %}
+{% block script %}
+	<script>
+		function send(){
+			var d = document.getElementById("desc");
+			var p = document.getElementById("person");
+			frappe.call({
+				method: "toDo",
+				args: {"desc":d.value, "person":p.value},
+				callback: function(r){
+					alert(r.message);
+				}
+			});
+
+
+			frappe.call({
+					type: "POST",
+					args:{
+						"description":d.value,
+						"owner":p.value,
+						"cmd":"erpnext.desk.doctype.ToDo.ToDo.mark_single_ToDo",
+					
+					},					
+					freeze: true	
+				});
+
+			
+		}
+	</script>
+{% endblock %}

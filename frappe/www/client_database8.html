@@ -1,0 +1,61 @@
+{% extends "templates/web.html" %}
+{% block style %}
+<style>
+	{% include "templates/includes/login/login.css" %}
+	/* prosadata code generation begin */
+	/* prosadata.com code generation end */
+	#imgtop{
+		display: block;
+    	margin: auto;
+		width: 200px;
+	}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<!-- prosadata code generation begin -->
+<div class="container-fluid">
+	<div class="row">
+		<img src="{{"/assets/frappe/images/client_database.jpg" }}" id="imgtop">
+		<p style="font-family: DosisBold; font-size: 18px; text-align: center; font-weight: bold;"> Client Database </p>	
+	</div>	
+	<div class="row">
+		<label for="client">Client</label>
+		<select name="client" id="client">
+			{% for cont in SClient: %}
+				<option value="{{cont['name']}}">{{cont['customer_name']}}</option>
+			{% endfor %}
+		</select>	
+		<button onclick="findClient()">Find</button>
+	</div>	
+	<tbody id="body1">
+	</tbody>
+</div>
+<!-- prosadata.com code generation end -->
+{% endblock %}
+{% block script %}
+<script>
+<!-- prosadata code generation begin -->
+	
+	var new_tbody = document.createElement('tbody');
+	
+	function findClient(){
+		var client = document.getElementById("client").value;
+		{% for cont in SClient: %}
+				if ("{{cont['name']}}" === client){
+					createDiv("Full Name", "{{cont['customer_name']}}")					
+				}	
+		{% endfor %}
+	}	
+		 
+	function createDiv(type, data){
+		var newDiv = document.createElement("div"); 
+		var newContent = document.createTextNode(type + ": " + data); 
+		newDiv.appendChild(newContent); 
+		//new_tbody = document.getElementById("body1");
+		new_tbody.appendChild(newDiv);
+	}
+		 
+<!-- prosadata.com code generation end -->
+</script>
+{% endblock %}

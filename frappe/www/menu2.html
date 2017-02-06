@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, user-scablable=no, inicial-scalable, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<!--<link rel="stylesheet" href="css/bootstrap.css" />-->
+{% block style %}
+<style>
+	{% include "www/css/bootstrap.css" %}
+</style>
+{% endblock %}	
+
+
+<title>COASTAL RANGE VINEYARDS</title>
+<style>
+  
+  .img-tamano{
+
+      width:150px;
+      padding:10px;
+
+    }
+
+    .altura {
+
+    	top:150px;
+
+
+    }
+.tamano {
+
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+	@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .altura { 
+
+      top:20px;
+      padding-bottom:20px;
+
+    }
+
+    .tamano {
+display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+  }
+  
+</style>
+
+
+</head>
+
+<body>
+	
+    <header>
+    	<nav class="navbar navbar-default">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#" style="font-family: DosisMedium; font-size: 22px; ">COASTAL RANGE VINEYARDS</a>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-family: DosisMedium;"><span class="glyphicon glyphicon-user" ></span> Employees <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">See crew list</a></li>
+                    <li><a href="#">Create employee sheet</a></li>
+                    <li><a href="#">Edit or delete employee sheet</a></li>
+                    <li><a href="#">See employee's attendance</a></li>
+                   </ul>  
+                    
+                  
+                </li>
+
+              
+
+                
+                
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-family: DosisMedium;"><span class="glyphicon glyphicon-calendar"></span> Projects <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Create new project</a></li>
+                    <li><a href="#">Edit or delete project</a></li>
+                    <li><a href="#">See project's calendar</a></li>
+                  </ul>
+                </li>
+                
+                
+
+
+                </ul>
+                
+                
+                
+                
+              
+              
+            </div><!-- /.navbar-collapse -->
+
+     
+          </div><!-- /.container-fluid -->
+        </nav>
+	
+<section>    
+    
+<div class="container-fluid">
+	<form class="form-signin form-login" role="form">
+	<div class="row"></div>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-2">
+      <!--<img src="{{ splash_image or "/assets/frappe/images/employee_control.jpg"}}" class="tamano">-->
+	  	<img src="{{ splash_image or "/assets/frappe/images/employee_control.jpg"}}" class="tamano" onclick="imageClick('../attendance')" />
+      <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Employee control </p>
+
+    </div>
+    <div class="col-md-2">
+      <img src="{{"/assets/frappe/images/work_orders.jpg" }}" class="tamano">
+      <!--<img src="img/work_orders.jpg" class="tamano"/>-->
+      <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Work Orders </p>
+
+    </div>
+    <div class="col-md-2">
+      <img src="{{"/assets/frappe/images/scheduler.jpg" }}" class="tamano" />
+      <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Scheduler </p>
+
+    </div>
+    <div class="col-md-2">
+      <img src="{{ splash_image or "/assets/frappe/images/client_database.jpg" }}" class="tamano"/>
+      <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Client Database </p>
+
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-2">
+        <img src="{{ splash_image or "/assets/frappe/images/vineyard_operations.jpg" }}" class="tamano"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Vineyard Operations </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{ splash_image or "/assets/frappe/images/client_portal.jpg" }}" class="tamano"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Client Portal </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{ splash_image or "/assets/frappe/images/fleet_management.jpg" }}" class="tamano"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Fleet Management </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{ splash_image or "/assets/frappe/images/inventory_control.jpg" }}" class="tamano"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Inventory Control </p>
+
+      </div>
+    </div>  
+    <div class="row">
+      <div class="col-md-offset-2 col-md-2">
+        <img src="{{ splash_image or "/assets/frappe/images/mapping.jpg" }}" class="tamano"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Mapping </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{ splash_image or "/assets/frappe/images/tool_shed.jpg" }}" class="tamano" />
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Tool Shed </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{ splash_image or "/assets/frappe/images/proposal_generator.jpg" }}" class="tamano"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Proposal Generator </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{ splash_image or "/assets/frappe/images/financials.jpg" }}" class="tamano"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Financials </p>
+      </div>
+  </div>
+    
+    
+</section>    
+    
+<footer style="background:#333;">
+	<div class="container">
+    <div class="row">
+    	
+        
+		  <p style="font-family:CrimsonRoman; color:#fff; text-align: center; padding-top: 10px;">© 2017 COASTAL RANGE VINEYARDS. All rights reserved.</p>
+<img src="{{ splash_image or "/assets/frappe/images/processsuccess.jpg" }}" width="15%" style="display: block;margin-left: auto;margin-right:auto;" />
+        </div>
+        
+     
+	</div> 
+	</form> 
+	</div>
+</footer>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

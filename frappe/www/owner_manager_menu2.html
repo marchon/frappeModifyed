@@ -1,0 +1,232 @@
+{% extends "templates/web.html" %}
+{% block style %}
+<style>
+	{% include "templates/includes/login/login.css" %}
+	{% include "www/css/bootstrap.css" %}
+	
+	/* prosadata code generation begin */
+	@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .altura { 
+
+      top:20px;
+      padding-bottom:20px;
+
+    }
+
+    .tamano {
+display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+  } 
+  .img-tamano{
+
+      width:150px;
+      padding:10px;
+
+    }
+
+    .altura {
+
+    	top:150px;
+
+
+    }
+.tamano {
+
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.view {
+
+background-color: #583086;
+color: #fff;
+}
+
+
+	@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .altura { 
+
+      top:20px;
+      padding-bottom:20px;
+
+    }
+
+    .tamano {
+}
+display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+  }
+  /* prosadata.com code generation end */
+</style>
+{% endblock %}
+
+{% block page_content %}
+<!-- prosadata code generation begin -->
+<div class="container-fluid">
+	<!--<form class="form-signin form-login" role="form">-->
+	<form role="form">
+	<div class="row"></div>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-2">
+      <!--<img src="{{ splash_image or "/assets/frappe/images/employee_control.jpg"}}" class="tamano">-->
+	  	<img src="{{" /assets/frappe/images/employee_control.jpg "}}" class="tamano" id="employee_control"/>
+      <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Employee control </p>
+
+    </div>
+    <div class="col-md-2">
+      <img src="{{"/assets/frappe/images/work_orders.jpg" }}" class="tamano" id="work_orders">
+      <!--<img src="img/work_orders.jpg" class="tamano"/>-->
+      <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Work Orders </p>
+
+    </div>
+    <div class="col-md-2">
+      <img src="{{"/assets/frappe/images/scheduler.jpg" }}" class="tamano" id="scheduler"/>
+      <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Scheduler </p>
+
+    </div>
+    <div class="col-md-2">
+      <img src="{{"/assets/frappe/images/client_database.jpg" }}" class="tamano" id="client_database"/>
+      <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Client Database </p>
+
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-2">
+        <img src="{{"/assets/frappe/images/vineyard_operations.jpg" }}" class="tamano" id="vineyard_operations"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Vineyard Operations </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{"/assets/frappe/images/client_portal.jpg" }}" class="tamano" id="client_portal"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Client Portal </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{ "/assets/frappe/images/fleet_management.jpg" }}" class="tamano" id="fleet_management"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Fleet Management </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{"/assets/frappe/images/inventory_control.jpg" }}" class="tamano" id="inventory_control"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Inventory Control </p>
+
+      </div>
+    </div>  
+    <div class="row">
+      <div class="col-md-offset-2 col-md-2">
+        <img src="{{"/assets/frappe/images/mapping.jpg" }}" class="tamano" id="mapping"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Mapping </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{"/assets/frappe/images/tool_shed.jpg" }}" class="tamano" id="tool_shed"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Tool Shed </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{"/assets/frappe/images/proposal_generator.jpg" }}" class="tamano" id="proposal_generator"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Proposal Generator </p>
+
+      </div>
+      <div class="col-md-2">
+        <img src="{{"/assets/frappe/images/financials.jpg" }}" class="tamano" id="financials"/>
+        <p style="font-family: DosisBold; font-size: 18px; text-align: center;"> Financials </p>
+      </div>
+  </div>
+    
+    
+	</section>    
+
+	
+	</form> 
+</div>
+<footer style="background:#333;">
+	<div class="container">
+	<div class="row">
+
+
+	<p style="font-family:CrimsonRoman; color:#fff; text-align: center; padding-top: 10px;">© 2017 COASTAL RANGE VINEYARDS. All rights reserved.</p>
+	<img src="{{ "/assets/frappe/images/processsuccess.jpg" }}" width="15%" style="display: block;margin-left: auto;margin-right:auto;" />
+	</div>
+
+
+	</div> 
+</footer> 	
+
+<!-- prosadata.com code generation end -->
+{% endblock %}
+{% block script %}
+<!-- prosadata code generation begin -->
+<script>
+
+window.disable_signup = {{ disable_signup and "true" or "false" }};
+
+window.login = {};
+
+login.bind_events = function() {
+	$( "#employee_control" ).click(function() {
+  			var path = "/sorry.html";
+			window.location.href = path;
+		});
+	$( "#work_orders" ).click(function() {
+  			var path = "/workOrder10.html";
+			window.location.href = path;
+		});
+	$( "#tool_shed" ).click(function() {
+  			var path = "/sorry.html";
+			window.location.href = path;
+		});
+	$( "#scheduler" ).click(function() {
+  			var path = "/sorry.html";
+			window.location.href = path;
+		});
+	$( "#client_database" ).click(function() {
+		var path = "/sorry.html";
+		window.location.href = path;
+	});
+	$( "#client_portal" ).click(function() {
+		var path = "/client_menu3.html";
+		window.location.href = path;
+	});
+	$( "#vineyard_operations" ).click(function() {
+		var path = "/sorry.html";
+		window.location.href = path;
+	});
+	$( "#fleet_management" ).click(function() {
+		var path = "/sorry.html";
+		window.location.href = path;
+	});
+	$( "#inventory_control" ).click(function() {
+		var path = "/sorry.html";
+		window.location.href = path;
+	});
+	$( "#proposal_generator" ).click(function() {
+		var path = "/sorry.html";
+		window.location.href = path;
+	});
+	$( "#financials" ).click(function() {
+		var path = "/sorry.html";
+		window.location.href = path;
+	});
+	$( "#mapping" ).click(function() {
+		var path = "/sorry.html";
+		window.location.href = path;
+	});
+}
+
+frappe.ready(function() {
+	login.bind_events();
+});
+</script>
+<!-- prosadata.com code generation end -->
+{% endblock %}

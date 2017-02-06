@@ -1,0 +1,53 @@
+{% extends "templates/web.html" %}
+
+{% block style %}
+<style>
+{% include "templates/includes/login/login.css" %}
+</style>
+{% endblock %}
+
+{% block page_content %}
+	<form id="myForm" method="POST">
+		<label for="desc">New task:</label>
+		<input id="desc" type="text" name="desc">
+		<br><br>
+		<label for="person">Crew member:</label>
+		<select id="person">
+			{% for cont in rowContent: %}
+				<option value={{cont['email']}}>{{cont['email']}}</option>
+			{% endfor %} 
+		</select>
+		<br><br>
+		<label for="prio">Priority:</label>
+		<select id="prio">
+			<option value="Low">Low</option>
+			<option value="Medium">Medium</option>
+			<option value="High">High</option>
+		</select>
+		<br><br>
+		<label for="due_date">Due date:</label>
+		<input type="date" id="due_date" name="due_date">
+		<br><br>
+		<input type="button" value="Add" onclick="send()">
+
+	</form>
+
+{% endblock %}
+{% block script %}
+	<script>
+		function send(){
+			var d = document.getElementById("desc");
+			var p = document.getElementById("person");
+			var e = document.getElementById("prio");
+			var date = document.getElementById("due_date");
+
+			frappe.call({
+				method: "frappe.www.to_do24.toDo",
+				args: {"desc":d.value, "person":p.value, "prio": e.options[e.selectedIndex].text, "date": date.value},
+				callback: function(r){
+				}
+			});
+			
+		}
+	</script>
+{% endblock %}

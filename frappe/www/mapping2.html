@@ -1,0 +1,35 @@
+{% extends "templates/web.html" %}
+
+{% block style %}
+<style>
+{% include "templates/includes/login/login.css" %}
+</style>
+{% endblock %}
+
+{% block page_content %}
+	<h1>Mapping</h1>
+	<div id="map" style="width:400px;height:400px;background:yellow"></div>
+
+
+
+{% endblock %}
+{% block script %}
+	<script>
+		function myMap() {
+		var mapOptions = {
+		    center: new google.maps.LatLng(34.05, -118.24),
+		    zoom: 10,
+		    mapTypeId: google.maps.MapTypeId.HYBRID
+		}
+		var myCenter = new google.maps.LatLng(34.05, -118.24);
+		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+  		var marker = new google.maps.Marker({position:myCenter});
+  		marker.setMap(map);
+		}
+	</script>
+
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrstMxtS9ddgvbfY5oiDB8seRKDskMbA8&callback=myMap"></script>
+
+{% endblock %}

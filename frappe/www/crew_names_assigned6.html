@@ -1,0 +1,119 @@
+{% extends "templates/web.html" %}
+{% block style %}
+<style>
+	{% include "templates/includes/login/login.css" %}
+	  
+	{% include "www/css/bootstrap.css" %}
+  .img-tamano{
+
+      width:150px;
+      padding:10px;
+
+    }
+
+    .altura {
+
+    	top:150px;
+
+
+    }
+.tamano {
+
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clockon {
+
+background-color: #229a2a;
+color: #fff;
+
+}
+.clockout {
+
+background-color: #ad2525;
+color: #fff;
+}
+.break {
+
+background-color: #bfbf14;
+color: #fff;
+}
+.jobcode {
+
+background-color: #17468a;
+color: #fff;
+}
+.view {
+
+background-color: #583086;
+color: #fff;
+}
+
+
+	@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .altura { 
+
+      top:20px;
+      padding-bottom:20px;
+
+    }
+
+    .tamano {
+}
+display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+  }
+  
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+{% endblock %}
+
+	
+
+{% block page_content %}
+	<table>
+	  <tr>
+	    <th>Work order</th>
+	    <th>Crew names assigned</th>
+	  </tr>
+      {% for cont in rowContent: %}
+        
+        <tr>
+          <td>{{cont['work_order']}}</td>
+          <td>{{cont['employee_name']}}</td>
+        </tr>
+         
+      {% endfor %}  
+     
+  </table>
+
+
+{% endblock %}
+{% block script %}
+<script>
+
+
+</script>
+{% endblock %}
